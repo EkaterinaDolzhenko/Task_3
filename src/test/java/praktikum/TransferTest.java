@@ -1,10 +1,7 @@
 package praktikum;
 
 import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 import praktikum.pageobject.AccountProfilePage;
@@ -53,12 +50,14 @@ public class TransferTest {
 
         var accountProfilePage = new AccountProfilePage(driver);
 
-        assertTrue(accountProfilePage.isProfileButtonDisplayed(),
-                "Кнопка Профиль не отображается в Личном кабинете»");
-        assertTrue(accountProfilePage.isOrderHistoryButtonDisplayed(),
-                "Кнопка История заказов не отображается в Личном кабинете»");
-        assertTrue(accountProfilePage.isLogoutButtonDisplayed(),
-                "Кнопка Выход не отображается в Личном кабинете»");
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(accountProfilePage.isProfileButtonDisplayed(),
+                        "Кнопка Профиль не отображается в Личном кабинете»"),
+                () -> Assertions.assertTrue(accountProfilePage.isOrderHistoryButtonDisplayed(),
+                        "Кнопка История заказов не отображается в Личном кабинете»"),
+                () -> Assertions.assertTrue(accountProfilePage.isLogoutButtonDisplayed(),
+                        "Кнопка Выход не отображается в Личном кабинете»")
+        );
     }
 
     @DisplayName("Переход из личного кабинета в конструктор по клику на Конструктор")
@@ -79,12 +78,14 @@ public class TransferTest {
         var accountProfilePage = new AccountProfilePage(driver);
         accountProfilePage.clickConstructorButton();
 
-        assertTrue(mainPage.isConstructorHeaderDisplayed(),
-                "Заголовок Соберите бургер не отображается на странице»");
-        assertTrue(mainPage.areAllTabsDisplayed(),
-                "Разделы конструктора не отображаются на странице»");
-        assertTrue(mainPage.isCreateOrderButtonDisplayedAndClickable(),
-                "Кнопка Оформить заказ не доступна после перехода из личного кабинета");
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(mainPage.isConstructorHeaderDisplayed(),
+                        "Заголовок Соберите бургер не отображается на странице»"),
+                () -> Assertions.assertTrue(mainPage.areAllTabsDisplayed(),
+                        "Разделы конструктора не отображаются на странице»"),
+                () -> Assertions.assertTrue(mainPage.isCreateOrderButtonDisplayedAndClickable(),
+                        "Кнопка Оформить заказ не доступна после перехода из личного кабинета")
+        );
     }
 
     @DisplayName("Переход из личного кабинета в конструктор по клику на на логотип Stellar Burgers")
@@ -105,12 +106,14 @@ public class TransferTest {
         var accountProfilePage = new AccountProfilePage(driver);
         accountProfilePage.clickLogo();
 
-        assertTrue(mainPage.isConstructorHeaderDisplayed(),
-                "Заголовок Соберите бургер не отображается на странице»");
-        assertTrue(mainPage.areAllTabsDisplayed(),
-                "Разделы конструктора не отображаются на странице»");
-        assertTrue(mainPage.isCreateOrderButtonDisplayedAndClickable(),
-                "Кнопка Оформить заказ не доступна после перехода из личного кабинета");
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(mainPage.isConstructorHeaderDisplayed(),
+                        "Заголовок Соберите бургер не отображается на странице»"),
+                () -> Assertions.assertTrue(mainPage.areAllTabsDisplayed(),
+                        "Разделы конструктора не отображаются на странице»"),
+                () -> Assertions.assertTrue(mainPage.isCreateOrderButtonDisplayedAndClickable(),
+                        "Кнопка Оформить заказ не доступна после перехода из личного кабинета")
+        );
     }
 
     @DisplayName("Выход по кнопке «Выйти» в личном кабинете")

@@ -5,6 +5,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
+import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +58,7 @@ public class UserClient {
                 .when()
                 .post("/api/auth/login");
 
-        if (response.statusCode() == 200) {
+        if (response.statusCode() == HttpURLConnection.HTTP_OK) {
             accessToken = response.jsonPath().getString("accessToken");
             return accessToken;
         }
@@ -77,7 +78,7 @@ public class UserClient {
                     .when()
                     .delete("/api/auth/user");
 
-            return response.statusCode() == 202;
+            return response.statusCode() == HttpURLConnection.HTTP_ACCEPTED;
         }
         return false;
     }
